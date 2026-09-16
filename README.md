@@ -1,5 +1,7 @@
 # 17.30-Gameserver
 - Used for Phase
+- Made by [PongooDev](https://github.com/PongooDev)
+ 
 # Features:
 
 - Proper bots
