@@ -11,3 +11,16 @@
 
 # TO-DO:
 - [ ]  Fix for NPCs that respawn after death
+- [ ]  Fix for server crashes
+- [ ]  Fix NetMode
+- [ ]  Fix Inventory
+- [ ]  Better PlayerBot
+- [ ]  RebootVan , RebootCard , etc..
+- [ ]  Fix NPCs
+- [ ]  Player Bots after jumping out of the bus skydiving to their destination
+- [ ]  Slone's special clone ability
+- [ ]  Bot sound detection
+- [ ]  NPC's Stealth meter
+
+# issues
+If you discover any other errors or bugs, please contact me on Discord at @kikai_.
