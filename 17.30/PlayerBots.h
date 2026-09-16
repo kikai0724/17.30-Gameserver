@@ -33,6 +33,10 @@ namespace PlayerBots {
 		// So we can track the current tick that the bot is doing
 		uint64_t tick_counter = 0;
 
+	// Storm tracking: time when bot entered storm and whether currently in storm
+	float StormEntryTime = 0.0f;
+	bool bInStorm = false;
+
 	public:
 		PhoebeBot(AFortAthenaAIBotController* PC, AFortPlayerPawnAthena* Pawn, AFortPlayerStateAthena* PlayerState)
 		{
@@ -184,6 +188,29 @@ namespace PlayerBots {
 		for (auto bot : PhoebeBots)
 		{
 			if (!bot->bTickEnabled) continue;
+
+			if (!bot->Pawn) continue;
+
+			bool bIsInSafeZone = UFortKismetLibrary::IsLocationInSafeZone(UGameplayStatics::GetDefaultObj(), bot->Pawn->K2_GetActorLocation());
+			if (!bIsInSafeZone) {
+				float Now = UGameplayStatics::GetDefaultObj()->GetTimeSeconds(UWorld::GetWorld());
+				if (!bot->bInStorm) {
+					bot->bInStorm = true;
+					bot->StormEntryTime = Now;
+				}
+				else {
+					if (Now - bot->StormEntryTime >= 3.0f) {
+						UGameplayStatics::ApplyDamage(bot->Pawn, 999999.f, bot->PC, nullptr, UDamageType::StaticClass());
+						bot->bInStorm = false;
+						bot->StormEntryTime = 0.0f;
+						continue;
+					}
+				}
+			}
+			else {
+				bot->bInStorm = false;
+				bot->StormEntryTime = 0.0f;
+			}
 
 			if (bot->BT_Phoebe) {
 				bot->BT_Phoebe->Tick(bot->Context);

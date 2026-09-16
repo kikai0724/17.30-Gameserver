@@ -124,7 +124,10 @@ namespace NetDriver {
 
 	int GetNetMode()
 	{
-		return (int)ENetMode::DedicatedServer;
+		if (Globals::bIsProdServer) {
+			return (int)ENetMode::DedicatedServer;
+		}
+		return (int)ENetMode::Standalone;
 	}
 
 	void HookAll() {
