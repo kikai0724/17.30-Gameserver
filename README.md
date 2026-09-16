@@ -10,4 +10,4 @@
 - The basic stuff youd find in any ol' gs
 
 # TO-DO:
-[ ] Fix for NPCs that respawn after death
+- [ ]  Fix for NPCs that respawn after death
