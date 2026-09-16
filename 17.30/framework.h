@@ -280,6 +280,12 @@ T* Actors(UClass* Class = T::StaticClass(), FVector Loc = {}, FRotator Rot = {},
 
 AFortPickup* SpawnPickup(UFortItemDefinition* ItemDef, int OverrideCount, int LoadedAmmo, FVector Loc, EFortPickupSourceTypeFlag SourceType, EFortPickupSpawnSource Source, bool bShouldCombine = false, AFortPawn* Pawn = nullptr)
 {
+	if (!ItemDef) {
+		// Missing item definition (hotfix/data mismatch). Avoid spawning null pickup to prevent crashes.
+		Log("SpawnPickup: ItemDef is null, skipping spawn.");
+		return nullptr;
+	}
+
 	auto SpawnedPickup = Actors<AFortPickup>(AFortPickup::StaticClass(), Loc);
 	SpawnedPickup->bRandomRotation = true;
 
