@@ -18085,7 +18085,6 @@ TArray<class FString> UAthenaCosmeticItemDefinition::GetAllPossibleNativeMeshCom
 	Func->FunctionFlags |= 0x400;
 
 	GetDefaultObj()->ProcessEvent(Func, &Parms);
-
 	Func->FunctionFlags = Flgs;
 
 	return Parms.ReturnValue;
