@@ -26,12 +26,11 @@ void UOnlineHotfixManager::StartHotfixProcess()
 	if (Func == nullptr)
 		Func = Class->GetFunction("OnlineHotfixManager", "StartHotfixProcess");
 
-	auto Flgs = Func->FunctionFlags;
-	Func->FunctionFlags |= 0x400;
-
-	UObject::ProcessEvent(Func, nullptr);
-
-	Func->FunctionFlags = Flgs;
+	// Hotfix application disabled for dedicated server build to avoid applying potentially
+	// incompatible/partial data patches that can leave assets in an invalid state.
+	// This makes the server tolerant when remote hotfix data is missing or malformed.
+	Log("StartHotfixProcess: hotfix application skipped (disabled).");
+	return;
 }
 
 }
